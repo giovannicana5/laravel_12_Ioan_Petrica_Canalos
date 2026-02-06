@@ -1,0 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+.header {
+    height: 40vh;
+    background-color: chocolate;
+}
