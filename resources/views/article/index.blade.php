@@ -8,6 +8,7 @@
             </div>
         </div>
     </header>
+    <x-display-message />
     <div class="container">
         <div class="row my-5">
             {{-- @dd($products) --}}
@@ -20,6 +21,12 @@
                         <p class="card-subtitle">{{$article->subtitle}}</p>
                         <p class="card-text">{{$article->body}}</p>
                         <a href="{{route('article.show', compact('article'))}}" class="btn btn-primary">Dettaglio dell'articolo</a>
+                        <a href="{{route('article.edit', compact('article'))}}" class="btn btn-warning">Modifica l'articolo</a>
+                        <form action="{{route('article.destroy', compact('article'))}}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Elimina l'articolo</button>
+                        </form>
                     </div>
                 </div>
             </div>

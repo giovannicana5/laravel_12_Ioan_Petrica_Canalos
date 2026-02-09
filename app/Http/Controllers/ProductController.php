@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -16,6 +17,7 @@ class ProductController extends Controller
         return view('product.create');
     }
     public function store(ProductRequest $request) {
+        // dd(Auth::user()->id);
         // dd($request->all());
         // dd($request->all());
         $name = $request->name;
@@ -32,7 +34,7 @@ class ProductController extends Controller
         // $product->price = $price;
         // dd($product);
         // $product->save();
-        Product::create(['name' => $name, 'description' => $description, 'price' => $price, 'img' => $img]);
+        Product::create(['name' => $name, 'description' => $description, 'price' => $price, 'img' => $img, 'user_id' => Auth::user()->id]);
         return redirect()->back()->with('message', 'Prodotto inserito');
     }
     public function index() {

@@ -30,11 +30,23 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        // $title = $request->title;
-        // $subtitle = $request->subtitle;
-        // $body = $request->body;
-        // $img = $request->file('img')->store('img', 'public');
-        Article::create(['title' => $request->title, 'subtitle' => $request->subtitle, 'body' => $request->body, 'img' => $request->file('img')->store('img', 'public')]);
+        // $img = null;
+        // if($request->file('img')) {
+            // $img = $request->file('img')->store('img', 'public');
+            // $title = $request->title;
+            // $subtitle = $request->subtitle;
+            // $body = $request->body;
+            // $img = $request->file('img')->store('img', 'public');
+        //     Article::create(['title' => $request->title, 'subtitle' => $request->subtitle, 'body' => $request->body, 'img' => $request->file('img')->store('img', 'public')]);
+        // }
+        // else {
+        //     Article::create(['title' => $request->title, 'subtitle' => $request->subtitle, 'body' => $request->body]);
+        // }
+        $article = Article::create(['title' => $request->title, 'subtitle' => $request->subtitle, 'body' => $request->body]);
+        if($request->file('img')) {
+            $article->img = $request->file('img')->store('img', 'public');
+            $article->save();
+        }
         return redirect()->back()->with('message', 'articolo inserito con successo');
     }
 
@@ -52,7 +64,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-
+        return view('article.edit', compact('article'));
     }
 
     /**
@@ -60,7 +72,16 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-
+        // dd($request->all(), $article);
+        if($request->file('img')) {
+            $img = $request->file('img')->store('img', 'public');
+        }
+        else {
+            $img = $article->img;
+        }
+        $article->update(['title' => $request->title, 'subtitle' => $request->subtitle, 'body' => $request->body, 'img' => $img]);
+        // dd($article);
+        return redirect(route('article.index'))->with('message', 'articolo modificato con successo');
     }
 
     /**
@@ -68,6 +89,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-
+        $article->delete();
+        return redirect()->back()->with('message', 'articolo eliminato con successo');
     }
 }
