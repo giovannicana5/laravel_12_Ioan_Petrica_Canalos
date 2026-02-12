@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
-.header {
+@import './masthead.css';
+/* .header {
     height: 40vh;
     background-color: chocolate;
-}
+} */

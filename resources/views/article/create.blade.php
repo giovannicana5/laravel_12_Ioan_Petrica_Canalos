@@ -1,15 +1,8 @@
 <x-layout>
-    <header class="header">
-        <div class="container h-100">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <h1 class="text-center">Inserisci un nuovo articolo</h1>
-                </div>
-            </div>
-        </div>
-    </header>
+    <x-masthead title="Inserisci un nuovo articolo"></x-masthead>
     <x-display-message />
     <x-display-errors />
+    {{-- @dd($tags) --}}
     <div class="container">
         <div class="row mt-5 justify-content-center my-5">
             <div class="col-12 col-md-6 justify-content-center">
@@ -26,6 +19,14 @@
                     <div class="mb-3">
                         <label for="body" class="form-label">Corpo dell'articolo</label>
                         <textarea name="body" class="form-control" id="body">{{old('body')}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        @foreach($tags as $tag)
+                            <div class="form-check">
+                                <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->id}}" id="checkDefault">
+                                <label class="form-check-label" for="checkDefault">{{$tag->name}}</label>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="mb-3">
                         <label for="img" class="form-label">Inserisci l'immagine</label>

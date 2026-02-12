@@ -1,14 +1,6 @@
 <x-layout>
     {{-- @dd($article) --}}
-    <header class="header">
-        <div class="container h-100">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <h1 class="text-center">Modifica un articolo: {{$article->title}}</h1>
-                </div>
-            </div>
-        </div>
-    </header>
+    <x-masthead title="Modifica un articolo: {{$article->title}}"></x-masthead>
     <x-display-message />
     <x-display-errors />
     <div class="container">
@@ -28,6 +20,14 @@
                     <div class="mb-3">
                         <label for="body" class="form-label">Corpo dell'articolo</label>
                         <textarea name="body" class="form-control" id="body">{{$article->body}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        @foreach($tags as $tag)
+                            <div class="form-check">
+                                <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->id}}" id="checkDefault" @if($article->tags->contains($tag)) checked @endif>
+                                <label class="form-check-label" for="checkDefault">{{$tag->name}}</label>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="mb-3">
                         <span class="form-label">Immagine attuale</span>
