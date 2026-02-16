@@ -22,6 +22,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('article.create')}}">Crea un articolo</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('tag.create')}}">Crea un tag</a>
+                    </li>
                 @endauth
                 @guest
                 @endguest

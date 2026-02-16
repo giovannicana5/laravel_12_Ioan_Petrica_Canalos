@@ -16,7 +16,7 @@
                         @if($article->tags->isNotEmpty())
                         <div class="mb-3">
                             @foreach($article->tags as $tag)
-                                <span class="badge text-bg-primary">#{{$tag->name}}</span>
+                                <a href="{{route('tag.index')}}" target="_blank" class="badge text-bg-primary">#{{$tag->name}}</a>
                             @endforeach
                         </div>
                         @endif

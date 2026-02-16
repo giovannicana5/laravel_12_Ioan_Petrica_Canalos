@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TagController;
 
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
 Route::get('/product/create', [ProductController::class, 'create'])->name('product.create')->middleware('auth');
@@ -16,3 +17,5 @@ Route::get('/article/show/{article}', [ArticleController::class, 'show'])->name(
 Route::get('/article/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit')->middleware('auth');
 Route::put('/article/update/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware('auth');
 Route::delete('/article/destroy/{article}', [ArticleController::class, 'destroy'])->name('article.destroy')->middleware('auth');
+Route::get('/tag/create', [TagController::class, 'create'])->name('tag.create')->middleware('auth');
+Route::post('/tag/store', [TagController::class, 'store'])->name('tag.store')->middleware('auth');
